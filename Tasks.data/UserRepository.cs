@@ -25,6 +25,12 @@ namespace Tasks.data
             using var context = new TasksDbContext(_connectionString);
             return context.Users.FirstOrDefault(u => u.Email == email);
         }
+        public User GetUserById(int id)
+        {
+            using var context = new TasksDbContext(_connectionString);
+            var user = context.Users.FirstOrDefault(u => u.Id == id);
+            return user;
+        }
         public User Login(string email, string password)
         {
             var user = GetUserByEmail(email);

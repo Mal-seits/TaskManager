@@ -34,19 +34,28 @@ namespace Tasks.web.Controllers
             var repo = new UserRepository(_connectionString);
             repo.AddUser(viewModel, viewModel.Password);
         }
+
         [HttpGet]
-        [Route("GetCurrentUser")]
+        [Route("getcurrentuser")]
         public User GetCurrentUser()
         {
             string userId = User.FindFirst("user")?.Value;
+
             if (String.IsNullOrEmpty(userId))
             {
-                 return null;
+                return null;
             }
             var repo = new UserRepository(_connectionString);
             return repo.GetUserByEmail(userId);
-
         }
+        [HttpGet]
+        [Route("getuserbyid")]
+        public User GetUserById(int userId)
+        { 
+            var repo = new UserRepository(_connectionString);
+            return repo.GetUserById(userId);
+        }
+
         [HttpPost]
         [Route("Login")]
       public IActionResult Login(LoginViewModel viewModel)
@@ -69,7 +78,7 @@ namespace Tasks.web.Controllers
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             return Ok(new { token = tokenString });
         }
-
+        
 
     }
 

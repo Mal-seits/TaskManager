@@ -16,4 +16,8 @@ namespace Tasks.web.ViewModels
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    public class AddTaskViewModel
+    {
+        public string Name { get; set; }
+    }
 }

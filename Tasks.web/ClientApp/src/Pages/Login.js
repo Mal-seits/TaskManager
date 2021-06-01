@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import getAxios from '../AuthAxios';
 import { useHistory } from 'react-router-dom';
-import { useAuthContext } from '../AuthContext';
+import { useUserContext } from '../UserContext';
 
 const Login = () => {
 
@@ -10,7 +10,7 @@ const Login = () => {
     let { email, password } = formData;
     const [isValid, setIsValid] = useState(true);
     const history = useHistory();
-    const { setUser } = useAuthContext();
+    const { setUser } = useUserContext();
     const [disable, setDisable] = useState(false);
 
 
@@ -28,7 +28,7 @@ const Login = () => {
             e.preventDefault();
             setIsValid(true);
             const { data } = await getAxios().post('/api/account/login', formData);
-            localStorage.setItem('auth-token', data.token);
+            localStorage.setItem('user-token', data.token);
 
             const { data: user } = await getAxios().get('/api/account/getcurrentuser');
             setUser(user);

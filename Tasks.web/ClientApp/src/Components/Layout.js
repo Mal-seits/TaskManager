@@ -1,18 +1,18 @@
-
+  
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthContext } from '../AuthContext';
+import { useUserContext } from '../UserContext';
 
 const Layout = ({ children }) => {
-    const { user } = useAuthContext();
-    const isLoggedIn = !!user;
 
+    const { user } = useUserContext();
+    const isLoggedIn = !!user;
     return (
         <div>
             <header>
                 <nav className="navbar navbar-expand-sm navbar-dark fixed-top bg-dark border-bottom box-shadow">
                     <div className="container">
-                        <Link to='/' className="navbar-brand">Tasks Manager</Link>
+                        <Link to='/' className="navbar-brand"> Tasks Manager </Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -20,16 +20,16 @@ const Layout = ({ children }) => {
                         </button>
                         <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                             <ul className="navbar-nav flex-grow-1">
-                                <li className="nav-item"><Link to="/" className='nav-link text-light'>Home</Link></li>
-                                {!isLoggedIn && <>
-                                    <li className="nav-item"><Link to="/signup" className='nav-link text-light'>Signup</Link></li>
-                                    <li className="nav-item"><Link to="/login" className='nav-link text-light'>Login</Link></li>
-                                </>}
-                                {isLoggedIn && <>
-                                    <li className="nav-item"><Link to="/secret" className='nav-link text-light'>Secret</Link></li>
+                                {!!isLoggedIn && <>
+                                    <li className="nav-item"><Link to="/" className='nav-link text-light'>Home</Link></li>
                                     <li className="nav-item"><Link to="/logout" className='nav-link text-light'>Logout</Link></li>
                                 </>}
+                                {!isLoggedIn && <>
+                                    <li className="nav-item"><Link to="/signup" className='nav-link text-light'>Signup Here!</Link></li>
+                                    <li className="nav-item"><Link to="/login" className='nav-link text-light'>Login Here!</Link></li>
+                                </>}
                             </ul>
+
                         </div>
                     </div>
                 </nav>

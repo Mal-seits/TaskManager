@@ -43,6 +43,8 @@ namespace Tasks.web
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
+            services.AddSignalR();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -72,6 +74,7 @@ namespace Tasks.web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
